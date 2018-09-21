@@ -6,13 +6,7 @@ from character import Character, Player
 
 # networking
 port = 12345
-s = socket.socket()
-
-# connect to the server
-s.connect(('127.0.0.1', port))
-
-# receive data from server
-print(s.recv(1024))
+host = "127.0.0.1"
 
 clock = pygame.time.Clock()
 
@@ -26,14 +20,13 @@ strips = {
     "up": SpriteStripAnim('assets/goblin.png', (0,130,65,65), 7, 1, True, 5),
     "left": SpriteStripAnim('assets/goblin.png', (0,195,65,65), 7, 1, True, 5)
 }
-p = Player(screen, strips, 100, 100, 65, 65)
+p = Player(screen, strips, host, port, 100, 100, 65, 65)
 
 image = strips["down"].next()
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-            s.close()
 
         # detect user key events
         keyboard.detect_key_press(event, p)

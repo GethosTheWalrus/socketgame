@@ -1,4 +1,4 @@
-import pygame
+import pygame, socket, json
 
 class Character(pygame.sprite.Sprite):
     def __init__(self, screen, strips, x, y, width, height):
@@ -23,8 +23,11 @@ class Character(pygame.sprite.Sprite):
             
         self.screen.blit(self.image, (self.rect.x, self.rect.y))
 
-class Player(Character):
-    def __init__(self, screen, strips, x, y, width, height):
+class Player(CharacterClient):
+    def __init__(self, screen, strips, host, port, x, y, width, height):
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.host, self.port = host, port
+
         super().__init__(screen, strips, x, y, width, height)
 
     def render(self):
@@ -35,3 +38,8 @@ class Player(Character):
     def move(self):
         self.rect.x += self.vx
         self.rect.y += self.vy
+        self._update_server("move", {"action": "move", "x": self.rect.x, "y": self.rect.y})
+
+    def _update_server(self, action, data):
+        json_data = json.dumps(data)
+        self.s.sendto(json_data.encode("utf-8"), (self.host, self.port))
