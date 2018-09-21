@@ -15,10 +15,10 @@ screen = pygame.display.set_mode((600, 600))
 running = True
 
 strips = {
-    "down": SpriteStripAnim('assets/goblin.png', (0,0,65,65), 7, 1, True, 5),
-    "right": SpriteStripAnim('assets/goblin.png', (0,65,65,65), 7, 1, True, 5),
-    "up": SpriteStripAnim('assets/goblin.png', (0,130,65,65), 7, 1, True, 5),
-    "left": SpriteStripAnim('assets/goblin.png', (0,195,65,65), 7, 1, True, 5)
+    "down": SpriteStripAnim('../assets/goblin.png', (0,0,65,65), 7, 1, True, 5),
+    "right": SpriteStripAnim('../assets/goblin.png', (0,65,65,65), 7, 1, True, 5),
+    "up": SpriteStripAnim('../assets/goblin.png', (0,130,65,65), 7, 1, True, 5),
+    "left": SpriteStripAnim('../assets/goblin.png', (0,195,65,65), 7, 1, True, 5)
 }
 p = Player(screen, strips, host, port, 100, 100, 65, 65)
 

@@ -23,7 +23,7 @@ class Character(pygame.sprite.Sprite):
             
         self.screen.blit(self.image, (self.rect.x, self.rect.y))
 
-class Player(CharacterClient):
+class Player(Character):
     def __init__(self, screen, strips, host, port, x, y, width, height):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.host, self.port = host, port
